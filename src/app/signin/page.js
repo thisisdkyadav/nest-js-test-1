@@ -1,11 +1,12 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
-export default function SignIn() {
+// New component to contain the logic that uses useSearchParams
+function SignInForm() {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -110,5 +111,13 @@ export default function SignIn() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function SignIn() {
+  return (
+    <Suspense fallback={<div>Loading page...</div>}>
+      <SignInForm />
+    </Suspense>
   );
 } 
