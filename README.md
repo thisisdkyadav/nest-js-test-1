@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js Authentication App
 
-## Getting Started
+A simple Next.js application with email/password authentication, PostgreSQL database, and CSS styling.
 
-First, run the development server:
+## Features
+
+- User registration and login with email/password
+- Protected routes with middleware
+- Dashboard showing user information
+- PostgreSQL database integration
+- Custom CSS styling
+
+## Prerequisites
+
+- Node.js 18+ and npm
+- PostgreSQL database
+
+## Setup
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Set up your PostgreSQL database:
+
+Create a PostgreSQL database and update the `.env.local` file with your database connection string.
+
+3. Set up the database schema:
+
+Run the SQL commands in `src/lib/schema.sql` in your PostgreSQL database.
+
+4. Configure environment variables:
+
+Update the values in `.env.local`:
+- `NEXTAUTH_SECRET`: A random string for session encryption
+- `DATABASE_URL`: Your PostgreSQL connection string
+
+5. Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+6. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `/src/app`: Next.js application routes and components
+- `/src/app/api`: API routes for authentication and registration
+- `/src/lib`: Utility functions and database configuration
+- `/public`: Static assets
 
-## Learn More
+## Authentication Flow
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. User registers via `/signup` page
+2. User logs in via `/signin` page
+3. NextAuth.js handles authentication and session management
+4. Protected routes are secured via middleware 
