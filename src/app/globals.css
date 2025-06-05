@@ -1,17 +1,21 @@
 :root {
-  --primary-color: #0070f3;
-  --secondary-color: #1f2937;
-  --background-color: #f9fafb;
-  --text-color: #111827;
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  
+  --background-color: #e0f2fe;
+  --foreground-color: #ffffff;
+  --text-color: #0d1b2a;
+  --subtle-text-color: #4a5568;
+  --border-color: rgba(0, 0, 0, 0.08);
+
+  --glass-bg-color: rgba(255, 255, 255, 0.65);
+  --glass-backdrop-blur: 10px;
+  --glass-border-radius: 16px;
+  --glass-box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+  --glass-border-color: rgba(255, 255, 255, 0.18);
+
   --error-color: #ef4444;
   --success-color: #10b981;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 html,
@@ -19,10 +23,11 @@ body {
   max-width: 100vw;
   min-height: 100vh;
   overflow-x: hidden;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   background-color: var(--background-color);
   color: var(--text-color);
+  line-height: 1.5;
 }
 
 * {
@@ -32,53 +37,82 @@ body {
 }
 
 a {
-  color: inherit;
+  color: var(--primary-color);
   text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+a:hover {
+  color: #0056b3;
 }
 
 button {
   cursor: pointer;
   font-family: inherit;
+  border: none;
+  border-radius: 8px;
+  padding: 0.65rem 1.25rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 0 1rem;
 }
 
+.glass-effect {
+  background: var(--glass-bg-color);
+  -webkit-backdrop-filter: blur(var(--glass-backdrop-blur)) saturate(180%);
+  backdrop-filter: blur(var(--glass-backdrop-blur)) saturate(180%);
+  border-radius: var(--glass-border-radius);
+  border: 1px solid var(--glass-border-color);
+  box-shadow: var(--glass-box-shadow);
+}
+
 .form-container {
-  max-width: 400px;
-  margin: 2rem auto;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: white;
+  max-width: 450px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background: var(--glass-bg-color);
+  -webkit-backdrop-filter: blur(var(--glass-backdrop-blur)) saturate(180%);
+  backdrop-filter: blur(var(--glass-backdrop-blur)) saturate(180%);
+  border-radius: var(--glass-border-radius);
+  border: 1px solid var(--glass-border-color);
+  box-shadow: var(--glass-box-shadow);
 }
 
 .form-group {
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
   font-weight: 500;
+  color: var(--subtle-text-color);
 }
 
 .form-group input {
   width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #d1d5db;
-  border-radius: 4px;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
   font-size: 1rem;
+  background-color: rgba(255, 255, 255, 0.5);
+  color: var(--text-color);
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
 }
 
 .btn {
   display: inline-block;
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 4px;
   font-size: 1rem;
   font-weight: 500;
   text-align: center;
@@ -88,20 +122,23 @@ button {
 
 .btn-primary {
   background-color: var(--primary-color);
-  color: white;
+  color: var(--foreground-color);
 }
 
 .btn-primary:hover {
-  background-color: #0051a8;
+  background-color: #0056b3;
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
 }
 
 .btn-secondary {
-  background-color: #e5e7eb;
-  color: #374151;
+  background-color: #f8f9fa;
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
 }
 
 .btn-secondary:hover {
-  background-color: #d1d5db;
+  background-color: #e9ecef;
+  border-color: #ced4da;
 }
 
 .error {
@@ -120,9 +157,9 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 0;
-  border-bottom: 1px solid #e5e7eb;
-  margin-bottom: 2rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 2.5rem;
 }
 
 .nav {
@@ -132,9 +169,10 @@ button {
 }
 
 .page-title {
-  margin-bottom: 1.5rem;
-  font-size: 1.875rem;
-  font-weight: 600;
+  margin-bottom: 2rem;
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--text-color);
 }
 
 .text-center {
@@ -159,10 +197,4 @@ button {
 
 .w-full {
   width: 100%;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
 }
